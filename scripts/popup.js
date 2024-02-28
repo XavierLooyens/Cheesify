@@ -1,5 +1,8 @@
 function sendCheesifyMsg() {
-  // TODO: Write a function to send a message to the active tab to 'cheesify' it
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) { //Finds that are active
+    chrome.tabs.sendMessage(tabs[0].id, {action: 'cheesify'}); //Sends a message (object) to the active tab
+  });
 }
 
-// TODO: Add an event listener to trigger the function above when clicking the 'Cheesify' button
+//Trigger the function when the button is clicked
+document.querySelector('#cheesify').addEventListener('click', event => sendCheesifyMsg());
